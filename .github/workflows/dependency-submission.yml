@@ -19,4 +19,4 @@ jobs:
           java-version: "21"
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
-      - uses: gradle/actions/dependency-submission@v4
+      - uses: gradle/actions/dependency-submission@v6
