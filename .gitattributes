@@ -1,0 +1,8 @@
+# Treat binary files explicitly to prevent Git from corrupting line endings (CRLF/LF conversion)
+*.keystore binary
+*.jks binary
+*.png binary
+*.jpg binary
+*.jar binary
+*.bin binary
+*.so binary

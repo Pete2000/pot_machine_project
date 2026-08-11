@@ -1,0 +1,617 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1833a89dcac54117b1b42244bf15c65b",
+    "entities": [
+      {
+        "tableName": "orders",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `recipe_code` TEXT NOT NULL, `quantity` INTEGER NOT NULL, `target_temperature` INTEGER NOT NULL, `cook_seconds` INTEGER NOT NULL, `spice_level` INTEGER NOT NULL, `table_code` TEXT, `order_time` TEXT, `pot_mode` TEXT NOT NULL, `pot_bottom_name` TEXT, `taste_summary` TEXT, `slot_summary` TEXT, `status` TEXT NOT NULL, `base_hash` TEXT, `ikms_order` TEXT, `source_root_id` TEXT, `root_pos_food_code` TEXT, `slot_code_summary` TEXT, `operator` TEXT, `operation` TEXT, `pot_bottom_summary` TEXT, `order_aliases_json` TEXT NOT NULL, `structure_status` TEXT NOT NULL, `structure_message` TEXT, `expected_slot_count` INTEGER NOT NULL, `attached_bottom_count` INTEGER NOT NULL, `raw_bottom_candidate_count` INTEGER NOT NULL, `missing_slot_labels_json` TEXT NOT NULL, `water_completed_at` TEXT, `cancelled_at` TEXT, `transfer_completed_at` TEXT, `status_updated_at` TEXT, `is_urged` INTEGER NOT NULL, `urged_at` TEXT, `created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recipeCode",
+            "columnName": "recipe_code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "targetTemperature",
+            "columnName": "target_temperature",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cookSeconds",
+            "columnName": "cook_seconds",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "spiceLevel",
+            "columnName": "spice_level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tableCode",
+            "columnName": "table_code",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "orderTime",
+            "columnName": "order_time",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "potMode",
+            "columnName": "pot_mode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "potBottomName",
+            "columnName": "pot_bottom_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tasteSummary",
+            "columnName": "taste_summary",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "slotSummary",
+            "columnName": "slot_summary",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "baseHash",
+            "columnName": "base_hash",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "ikmsOrder",
+            "columnName": "ikms_order",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "sourceRootId",
+            "columnName": "source_root_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rootPosFoodCode",
+            "columnName": "root_pos_food_code",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "slotCodeSummary",
+            "columnName": "slot_code_summary",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "operator",
+            "columnName": "operator",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "operation",
+            "columnName": "operation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "potBottomSummary",
+            "columnName": "pot_bottom_summary",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "orderAliasesJson",
+            "columnName": "order_aliases_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "structureStatus",
+            "columnName": "structure_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "structureMessage",
+            "columnName": "structure_message",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "expectedSlotCount",
+            "columnName": "expected_slot_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "attachedBottomCount",
+            "columnName": "attached_bottom_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rawBottomCandidateCount",
+            "columnName": "raw_bottom_candidate_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "missingSlotLabelsJson",
+            "columnName": "missing_slot_labels_json",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "waterCompletedAt",
+            "columnName": "water_completed_at",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "cancelledAt",
+            "columnName": "cancelled_at",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "transferCompletedAt",
+            "columnName": "transfer_completed_at",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "statusUpdatedAt",
+            "columnName": "status_updated_at",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isUrged",
+            "columnName": "is_urged",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "urgedAt",
+            "columnName": "urged_at",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updated_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "idx_orders_status_order_time",
+            "unique": false,
+            "columnNames": [
+              "status",
+              "order_time"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_orders_status_order_time` ON `${TABLE_NAME}` (`status`, `order_time`)"
+          },
+          {
+            "name": "idx_orders_base_hash",
+            "unique": false,
+            "columnNames": [
+              "base_hash"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_orders_base_hash` ON `${TABLE_NAME}` (`base_hash`)"
+          },
+          {
+            "name": "idx_orders_ikms_order",
+            "unique": false,
+            "columnNames": [
+              "ikms_order"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_orders_ikms_order` ON `${TABLE_NAME}` (`ikms_order`)"
+          },
+          {
+            "name": "idx_orders_source_root",
+            "unique": false,
+            "columnNames": [
+              "source_root_id",
+              "root_pos_food_code"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_orders_source_root` ON `${TABLE_NAME}` (`source_root_id`, `root_pos_food_code`)"
+          }
+        ]
+      },
+      {
+        "tableName": "order_aliases",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alias` TEXT NOT NULL, `order_id` TEXT NOT NULL, `alias_type` TEXT NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`alias`, `order_id`), FOREIGN KEY(`order_id`) REFERENCES `orders`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "alias",
+            "columnName": "alias",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderId",
+            "columnName": "order_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aliasType",
+            "columnName": "alias_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "alias",
+            "order_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "idx_order_aliases_order_id",
+            "unique": false,
+            "columnNames": [
+              "order_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_order_aliases_order_id` ON `${TABLE_NAME}` (`order_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "orders",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "order_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "order_events",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `order_id` TEXT, `event_type` TEXT NOT NULL, `operation` TEXT, `from_status` TEXT, `to_status` TEXT, `table_code` TEXT, `source_order_alias` TEXT, `message` TEXT NOT NULL, `raw_payload_json` TEXT, `created_at` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderId",
+            "columnName": "order_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "eventType",
+            "columnName": "event_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "operation",
+            "columnName": "operation",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fromStatus",
+            "columnName": "from_status",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "toStatus",
+            "columnName": "to_status",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tableCode",
+            "columnName": "table_code",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "sourceOrderAlias",
+            "columnName": "source_order_alias",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "message",
+            "columnName": "message",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rawPayloadJson",
+            "columnName": "raw_payload_json",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "idx_order_events_order_id_created",
+            "unique": false,
+            "columnNames": [
+              "order_id",
+              "created_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_order_events_order_id_created` ON `${TABLE_NAME}` (`order_id`, `created_at`)"
+          },
+          {
+            "name": "idx_order_events_type_created",
+            "unique": false,
+            "columnNames": [
+              "event_type",
+              "created_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_order_events_type_created` ON `${TABLE_NAME}` (`event_type`, `created_at`)"
+          }
+        ]
+      },
+      {
+        "tableName": "plc_command_audits",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `command_id` INTEGER NOT NULL, `order_id` TEXT, `command_type` TEXT NOT NULL, `command_name` TEXT NOT NULL, `request_register_start` INTEGER, `request_payload_json` TEXT, `tx_hex` TEXT, `rx_hex` TEXT, `result` TEXT NOT NULL, `error_message` TEXT, `created_at` INTEGER NOT NULL, `completed_at` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "commandId",
+            "columnName": "command_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderId",
+            "columnName": "order_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "commandType",
+            "columnName": "command_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "commandName",
+            "columnName": "command_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "requestRegisterStart",
+            "columnName": "request_register_start",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "requestPayloadJson",
+            "columnName": "request_payload_json",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "txHex",
+            "columnName": "tx_hex",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "rxHex",
+            "columnName": "rx_hex",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "result",
+            "columnName": "result",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "errorMessage",
+            "columnName": "error_message",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedAt",
+            "columnName": "completed_at",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "idx_plc_commands_command_id",
+            "unique": false,
+            "columnNames": [
+              "command_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_plc_commands_command_id` ON `${TABLE_NAME}` (`command_id`)"
+          },
+          {
+            "name": "idx_plc_commands_order_id",
+            "unique": false,
+            "columnNames": [
+              "order_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_plc_commands_order_id` ON `${TABLE_NAME}` (`order_id`)"
+          },
+          {
+            "name": "idx_plc_commands_type_created",
+            "unique": false,
+            "columnNames": [
+              "command_type",
+              "created_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_plc_commands_type_created` ON `${TABLE_NAME}` (`command_type`, `created_at`)"
+          }
+        ]
+      },
+      {
+        "tableName": "plc_fault_events",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fault_type` TEXT NOT NULL, `severity` TEXT NOT NULL, `message` TEXT NOT NULL, `snapshot_json` TEXT, `created_at` INTEGER NOT NULL, `resolved_at` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "faultType",
+            "columnName": "fault_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "severity",
+            "columnName": "severity",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "message",
+            "columnName": "message",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "snapshotJson",
+            "columnName": "snapshot_json",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "resolvedAt",
+            "columnName": "resolved_at",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "idx_plc_fault_type_created",
+            "unique": false,
+            "columnNames": [
+              "fault_type",
+              "created_at"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `idx_plc_fault_type_created` ON `${TABLE_NAME}` (`fault_type`, `created_at`)"
+          }
+        ]
+      },
+      {
+        "tableName": "order_store_metadata",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1833a89dcac54117b1b42244bf15c65b')"
+    ]
+  }
+}

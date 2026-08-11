@@ -1,0 +1,40 @@
+# Local configuration
+local.properties
+
+# Gradle
+.gradle/
+build/
+**/build/
+.kotlin/
+
+# IDE
+.idea/
+*.iml
+
+# Android build system
+.externalNativeBuild/
+.cxx/
+captures/
+
+# Signing artifacts
+*.jks
+*.keystore
+
+# OS / temporary
+.DS_Store
+Thumbs.db
+
+# Local tooling and backups
+.codex-wrapper-tmp/
+.codex-remote-attachments/
+backups/
+artifacts/
+outputs/
+work/
+tmp-kotlinc-order-check/
+tmp_modbus_manual.pdf
+local_order_store*.xml
+docs/order-api.docx
+
+# Secrets
+keystore.properties
