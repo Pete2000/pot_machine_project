@@ -1,5 +1,11 @@
 # Public Release Audit
 
+## Current public release status (2026-08-11)
+
+This project was published as a separate public Git repository from a sanitized release snapshot. Its history begins with a new clean root and contains no prior project commits. The legacy archive remains private and must not be made public.
+
+The public repository uses the `dev` default branch and Apache-2.0. Its tracked tree was checked for `local_order_store.xml`, `local_order_store_utf8.xml`, and `docs/order-api.docx`; the count was zero. GitHub Actions were triggered after publication. The sections below are the retained pre-publication audit record.
+
 **Status:** Apache-2.0 selected locally — production order-interface data exclusion staged; history gate remains.
 **Audit date:** 2026-08-11
 **Baseline inspected:** Git `HEAD` `b83426f5e09b6ccd2d7fdfcfa9560285ce8c12fe` and the local public-release preparation changes.
