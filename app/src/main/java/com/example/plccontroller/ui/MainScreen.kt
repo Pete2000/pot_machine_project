@@ -307,24 +307,42 @@ fun MainScreen(
                         )
                         SettingsScreen(
                             state = settingsViewState,
-                            onOpenSecondaryDisplay = onOpenSecondaryDisplay,
-                            onPreviewSecondaryDisplay = onPreviewSecondaryDisplay,
-                            onSaveFormulaParameter = viewModel::saveFormulaParameter,
-                            onSelectCatalog = viewModel::selectFormulaCatalog,
-                            onUpdateSettings = viewModel::updateSettings,
-                            onStartRegistration = viewModel::startRegistration,
-                            onSelectDeviceType = viewModel::selectDeviceType,
-                            onSelectEquipment = viewModel::selectEquipment,
-                            onResetRegistrationState = viewModel::resetRegistrationState,
-                            onBeginHeaterActuatorConfigEdit = viewModel::beginHeaterActuatorConfigEdit,
-                            onCancelHeaterActuatorConfigEdit = viewModel::cancelHeaterActuatorConfigEdit,
-                            onSaveHeaterActuatorConfig = viewModel::saveHeaterActuatorConfig,
-                            onRefreshPlcStatus = viewModel::refreshPlcStatus,
-                            onSendHeartbeatPulse = viewModel::sendDebugHeartbeatPulse,
-                            onSendHeaterTestCommand = viewModel::sendDebugHeaterTestCommand,
-                            onSendEmergencyWaterTestCommand = viewModel::sendDebugEmergencyWaterTestCommand,
-                            onSendPhaseTestCommand = viewModel::sendDebugPhaseTestCommand,
-                            onClearAllLocalOrders = viewModel::clearAllLocalOrdersForDebug,
+                            actions =
+                                SettingsScreenActions(
+                                    display =
+                                        SettingsDisplayActions(
+                                            openSecondaryDisplay = onOpenSecondaryDisplay,
+                                            previewSecondaryDisplay = onPreviewSecondaryDisplay,
+                                        ),
+                                    formula =
+                                        SettingsFormulaActions(
+                                            saveParameter = viewModel::saveFormulaParameter,
+                                            selectCatalog = viewModel::selectFormulaCatalog,
+                                        ),
+                                    access =
+                                        SettingsAccessActions(
+                                            updateSettings = viewModel::updateSettings,
+                                            startRegistration = viewModel::startRegistration,
+                                            selectDeviceType = viewModel::selectDeviceType,
+                                            selectEquipment = viewModel::selectEquipment,
+                                            resetRegistrationState = viewModel::resetRegistrationState,
+                                        ),
+                                    device =
+                                        SettingsDeviceActions(
+                                            beginHeaterActuatorConfigEdit = viewModel::beginHeaterActuatorConfigEdit,
+                                            cancelHeaterActuatorConfigEdit = viewModel::cancelHeaterActuatorConfigEdit,
+                                            saveHeaterActuatorConfig = viewModel::saveHeaterActuatorConfig,
+                                        ),
+                                    diagnostics =
+                                        SettingsDiagnosticsActions(
+                                            refreshPlcStatus = viewModel::refreshPlcStatus,
+                                            sendHeartbeatPulse = viewModel::sendDebugHeartbeatPulse,
+                                            sendHeaterTestCommand = viewModel::sendDebugHeaterTestCommand,
+                                            sendEmergencyWaterTestCommand = viewModel::sendDebugEmergencyWaterTestCommand,
+                                            sendPhaseTestCommand = viewModel::sendDebugPhaseTestCommand,
+                                        ),
+                                    orders = SettingsOrderActions(clearAllLocalOrders = viewModel::clearAllLocalOrdersForDebug),
+                                ),
                             modifier = Modifier.weight(1f),
                         )
                     }

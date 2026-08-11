@@ -2,12 +2,12 @@ package com.example.plccontroller.data.plc
 
 import com.example.plccontroller.domain.PlcRegisterMap
 import kotlinx.coroutines.test.runTest
-import java.net.SocketTimeoutException
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.net.SocketTimeoutException
 
 class ModbusRtuTest {
     @Test

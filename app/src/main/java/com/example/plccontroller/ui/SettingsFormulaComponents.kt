@@ -308,35 +308,15 @@ private fun FormulaParameterEditDialog(
             )
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(
-                    text = "当前锅底编码: $potCode\n针对当前锅型微调加料时长（秒）",
-                    color = TextSecondary,
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-
-                FormulaParameterField(
-                    label = "加水时长 (s) [范围: 0 ~ 60]",
-                    value = waterSeconds,
-                    onValueChange = { waterSeconds = it },
-                    minVal = 0.0,
-                    maxVal = 60.0,
-                )
-                FormulaParameterField(
-                    label = "加鸡油时长 (s) [范围: 0 ~ 30]",
-                    value = chickenOilSeconds,
-                    onValueChange = { chickenOilSeconds = it },
-                    minVal = 0.0,
-                    maxVal = 30.0,
-                )
-                FormulaParameterField(
-                    label = "加骨膏时长 (s) [范围: 0 ~ 30]",
-                    value = bonePasteSeconds,
-                    onValueChange = { bonePasteSeconds = it },
-                    minVal = 0.0,
-                    maxVal = 30.0,
-                )
-            }
+            FormulaParameterEditFields(
+                potCode = potCode,
+                waterSeconds = waterSeconds,
+                chickenOilSeconds = chickenOilSeconds,
+                bonePasteSeconds = bonePasteSeconds,
+                onWaterSecondsChange = { waterSeconds = it },
+                onChickenOilSecondsChange = { chickenOilSeconds = it },
+                onBonePasteSecondsChange = { bonePasteSeconds = it },
+            )
         },
         confirmButton = {
             TextButton(
@@ -353,10 +333,11 @@ private fun FormulaParameterEditDialog(
                         ),
                     )
                 },
-                colors = ButtonDefaults.textButtonColors(
-                    contentColor = Cyan,
-                    disabledContentColor = TextSecondary.copy(alpha = 0.4f)
-                ),
+                colors =
+                    ButtonDefaults.textButtonColors(
+                        contentColor = Cyan,
+                        disabledContentColor = TextSecondary.copy(alpha = 0.4f),
+                    ),
             ) { Text("保存") }
         },
         dismissButton = {
@@ -381,7 +362,7 @@ private fun formatDoubleClean(value: Double): String {
 }
 
 @Composable
-private fun FormulaParameterField(
+internal fun FormulaParameterField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
@@ -391,7 +372,8 @@ private fun FormulaParameterField(
 ) {
     val doubleVal = value.toDoubleOrNull()
     val isError = doubleVal == null || doubleVal < minVal || doubleVal > maxVal
-    val errorMsg = when {
+    val errorMsg =
+        when {
         doubleVal == null -> "请输入合法的数值"
         doubleVal < minVal -> "不能低于 ${minVal}s"
         doubleVal > maxVal -> "不能超过 ${maxVal}s"

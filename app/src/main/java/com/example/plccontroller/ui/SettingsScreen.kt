@@ -14,34 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.plccontroller.data.AppPersistentConfig
-import com.example.plccontroller.data.SettingsStore
 import com.example.plccontroller.domain.*
 import com.example.plccontroller.runtime.NetworkConnectionState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
+// This Compose coordinator keeps page ownership visible; page actions are grouped above.
+@Suppress("LongMethod")
 @Composable
 internal fun SettingsScreen(
     state: SettingsViewState,
-    onOpenSecondaryDisplay: () -> Unit,
-    onPreviewSecondaryDisplay: () -> Unit,
-    onSaveFormulaParameter: (FormulaParameterUpdate) -> Unit,
-    onSelectCatalog: (String) -> Unit,
-    onUpdateSettings: ((SettingsStore) -> Unit) -> Unit,
-    onStartRegistration: () -> Unit,
-    onSelectDeviceType: (String) -> Unit,
-    onSelectEquipment: (com.example.plccontroller.data.http.EquipmentDto) -> Unit,
-    onResetRegistrationState: () -> Unit,
-    onBeginHeaterActuatorConfigEdit: () -> Unit,
-    onCancelHeaterActuatorConfigEdit: () -> Unit,
-    onSaveHeaterActuatorConfig: ((SettingsStore) -> Unit) -> Unit,
-    onRefreshPlcStatus: () -> Unit,
-    onSendHeartbeatPulse: () -> Unit,
-    onSendHeaterTestCommand: () -> Unit,
-    onSendEmergencyWaterTestCommand: () -> Unit,
-    onSendPhaseTestCommand: () -> Unit,
-    onClearAllLocalOrders: () -> Unit,
+    actions: SettingsScreenActions,
     modifier: Modifier = Modifier,
 ) {
     val tabs = SettingsTab.entries
@@ -145,11 +128,11 @@ internal fun SettingsScreen(
                             managementUrl = state.managementUrl,
                             deviceCode = state.deviceCode,
                             registrationState = state.registrationState,
-                            onStartRegistration = onStartRegistration,
-                            onSelectDeviceType = onSelectDeviceType,
-                            onSelectEquipment = onSelectEquipment,
-                            onResetRegistrationState = onResetRegistrationState,
-                            onUpdateSettings = onUpdateSettings,
+                            onStartRegistration = actions.access.startRegistration,
+                            onSelectDeviceType = actions.access.selectDeviceType,
+                            onSelectEquipment = actions.access.selectEquipment,
+                            onResetRegistrationState = actions.access.resetRegistrationState,
+                            onUpdateSettings = actions.access.updateSettings,
                             modifier = Modifier.fillMaxSize(),
                         )
 
@@ -161,9 +144,9 @@ internal fun SettingsScreen(
                             formulaSyncIntervalSeconds = state.formulaSyncIntervalSeconds,
                             options = formulaOptions,
                             selectedOption = selectedFormula,
-                            onSelectCatalog = onSelectCatalog,
+                            onSelectCatalog = actions.formula.selectCatalog,
                             onSelectOption = { selectedFormulaCode = it },
-                            onSaveFormulaParameter = onSaveFormulaParameter,
+                            onSaveFormulaParameter = actions.formula.saveParameter,
                             modifier = Modifier.fillMaxSize(),
                         )
 
@@ -173,10 +156,10 @@ internal fun SettingsScreen(
                             formulaSyncIntervalSeconds = state.formulaSyncIntervalSeconds,
                             deviceConfig = state.deviceConfig,
                             plcPollingSnapshot = state.plcPollingSnapshot,
-                            onUpdateSettings = onUpdateSettings,
-                            onBeginHeaterActuatorConfigEdit = onBeginHeaterActuatorConfigEdit,
-                            onCancelHeaterActuatorConfigEdit = onCancelHeaterActuatorConfigEdit,
-                            onSaveHeaterActuatorConfig = onSaveHeaterActuatorConfig,
+                            onUpdateSettings = actions.access.updateSettings,
+                            onBeginHeaterActuatorConfigEdit = actions.device.beginHeaterActuatorConfigEdit,
+                            onCancelHeaterActuatorConfigEdit = actions.device.cancelHeaterActuatorConfigEdit,
+                            onSaveHeaterActuatorConfig = actions.device.saveHeaterActuatorConfig,
                             modifier = Modifier.fillMaxSize(),
                         )
 
@@ -193,15 +176,15 @@ internal fun SettingsScreen(
                             logs = state.logs,
                             communicationConfig = state.communicationConfig,
                             plcPollingSnapshot = state.plcPollingSnapshot,
-                            onBeginHeaterActuatorConfigEdit = onBeginHeaterActuatorConfigEdit,
-                            onCancelHeaterActuatorConfigEdit = onCancelHeaterActuatorConfigEdit,
-                            onSaveHeaterActuatorConfig = onSaveHeaterActuatorConfig,
-                            onRefreshPlcStatus = onRefreshPlcStatus,
-                            onSendHeartbeatPulse = onSendHeartbeatPulse,
-                            onSendHeaterTestCommand = onSendHeaterTestCommand,
-                            onSendEmergencyWaterTestCommand = onSendEmergencyWaterTestCommand,
-                            onSendPhaseTestCommand = onSendPhaseTestCommand,
-                            onUpdateSettings = onUpdateSettings,
+                            onBeginHeaterActuatorConfigEdit = actions.device.beginHeaterActuatorConfigEdit,
+                            onCancelHeaterActuatorConfigEdit = actions.device.cancelHeaterActuatorConfigEdit,
+                            onSaveHeaterActuatorConfig = actions.device.saveHeaterActuatorConfig,
+                            onRefreshPlcStatus = actions.diagnostics.refreshPlcStatus,
+                            onSendHeartbeatPulse = actions.diagnostics.sendHeartbeatPulse,
+                            onSendHeaterTestCommand = actions.diagnostics.sendHeaterTestCommand,
+                            onSendEmergencyWaterTestCommand = actions.diagnostics.sendEmergencyWaterTestCommand,
+                            onSendPhaseTestCommand = actions.diagnostics.sendPhaseTestCommand,
+                            onUpdateSettings = actions.access.updateSettings,
                             modifier = Modifier.fillMaxSize(),
                         )
 
@@ -211,14 +194,14 @@ internal fun SettingsScreen(
                             communicationConfig = state.communicationConfig,
                             plcPollingSnapshot = state.plcPollingSnapshot,
                             lastMessage = state.lastMessage,
-                            onRefreshPlcStatus = onRefreshPlcStatus,
-                            onSendHeartbeatPulse = onSendHeartbeatPulse,
-                            onSendHeaterTestCommand = onSendHeaterTestCommand,
-                            onSendEmergencyWaterTestCommand = onSendEmergencyWaterTestCommand,
-                            onSendPhaseTestCommand = onSendPhaseTestCommand,
-                            onOpenSecondaryDisplay = onOpenSecondaryDisplay,
-                            onPreviewSecondaryDisplay = onPreviewSecondaryDisplay,
-                            onClearAllLocalOrders = onClearAllLocalOrders,
+                            onRefreshPlcStatus = actions.diagnostics.refreshPlcStatus,
+                            onSendHeartbeatPulse = actions.diagnostics.sendHeartbeatPulse,
+                            onSendHeaterTestCommand = actions.diagnostics.sendHeaterTestCommand,
+                            onSendEmergencyWaterTestCommand = actions.diagnostics.sendEmergencyWaterTestCommand,
+                            onSendPhaseTestCommand = actions.diagnostics.sendPhaseTestCommand,
+                            onOpenSecondaryDisplay = actions.display.openSecondaryDisplay,
+                            onPreviewSecondaryDisplay = actions.display.previewSecondaryDisplay,
+                            onClearAllLocalOrders = actions.orders.clearAllLocalOrders,
                             modifier = Modifier.fillMaxSize(),
                         )
                 }
@@ -358,24 +341,7 @@ private fun SettingsScreenPreview() {
             )
             SettingsScreen(
                 state = previewState,
-                onOpenSecondaryDisplay = {},
-                onPreviewSecondaryDisplay = {},
-                onSaveFormulaParameter = {},
-                onSelectCatalog = {},
-                onUpdateSettings = {},
-                onStartRegistration = {},
-                onSelectDeviceType = {},
-                onSelectEquipment = {},
-                onResetRegistrationState = {},
-                onBeginHeaterActuatorConfigEdit = {},
-                onCancelHeaterActuatorConfigEdit = {},
-                onSaveHeaterActuatorConfig = {},
-                onRefreshPlcStatus = {},
-                onSendHeartbeatPulse = {},
-                onSendHeaterTestCommand = {},
-                onSendEmergencyWaterTestCommand = {},
-                onSendPhaseTestCommand = {},
-                onClearAllLocalOrders = {},
+                actions = emptySettingsScreenActions(),
                 modifier = Modifier.fillMaxSize(),
             )
         }

@@ -174,15 +174,10 @@ private fun AccessEditDialog(
         mutableStateOf(target.initialValue)
     }
     var errorText by remember { mutableStateOf<String?>(null) }
-    val isUrl = target.title == "业务接口" || target.title == "管理后台"
+    val isUrl = AccessEditValue.isUrlTarget(target.title)
 
     androidx.compose.runtime.LaunchedEffect(value) {
-        val trimmed = value.trim()
-        errorText = when {
-            trimmed.isEmpty() -> "${target.title}不能为空"
-            isUrl && !trimmed.matches(Regex("^https?://.*$")) && !trimmed.matches(Regex("^[0-9a-zA-Z.:/-]+$")) -> "地址格式不正确，应为合法的网络路径"
-            else -> null
-        }
+        errorText = AccessEditValue.validate(target.title, value, isUrl)
     }
 
     AlertDialog(
@@ -213,7 +208,7 @@ private fun AccessEditDialog(
                 errorText?.let {
                     Text(text = it, color = Red, style = MaterialTheme.typography.bodySmall)
                 }
-                if (isUrl && errorText == null && !value.trim().startsWith("http://") && !value.trim().startsWith("https://")) {
+                if (AccessEditValue.shouldShowSchemeHint(value, isUrl, errorText)) {
                     Text(text = "提示：保存时将自动补全 http:// 前缀", color = Yellow, style = MaterialTheme.typography.bodySmall)
                 }
             }
@@ -222,13 +217,7 @@ private fun AccessEditDialog(
             TextButton(
                 enabled = errorText == null,
                 onClick = {
-                    val trimmed = value.trim()
-                    val finalValue = if (isUrl && !trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
-                        "http://$trimmed"
-                    } else {
-                        trimmed
-                    }
-                    target.onSave(finalValue)
+                    target.onSave(AccessEditValue.normalizeForSave(value, isUrl))
                     onDismiss()
                 },
             ) {
