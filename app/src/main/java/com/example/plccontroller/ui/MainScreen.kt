@@ -283,28 +283,29 @@ fun MainScreen(
                         )
 
                     BottomTab.Settings -> {
-                        val settingsViewState = SettingsViewState(
-                            networkState = state.networkState,
-                            plcState = state.plcState,
-                            formulaCatalog = state.formulaCatalog,
-                            availableCatalogs = state.availableCatalogs,
-                            formulaSourceLabel = state.formulaSourceLabel,
-                            communicationConfig = state.communicationConfig,
-                            businessUrl = state.businessUrl,
-                            managementUrl = state.managementUrl,
-                            deviceCode = state.deviceCode,
-                            formulaSyncIntervalSeconds = state.formulaSyncIntervalSeconds,
-                            deviceConfig = state.deviceConfig,
-                            plcPollingSnapshot = state.plcPollingSnapshot,
-                            pendingOrders = state.pendingOrders,
-                            waitingTransferOrders = state.waitingTransferOrders,
-                            completedOrders = state.completedOrders,
-                            cancelledOrders = state.cancelledOrders,
-                            lastMessage = state.lastMessage,
-                            logCount = state.logs.size,
-                            logs = state.logs,
-                            registrationState = registrationState,
-                        )
+                        val settingsViewState =
+                            SettingsViewState(
+                                networkState = state.networkState,
+                                plcState = state.plcState,
+                                formulaCatalog = state.formulaCatalog,
+                                availableCatalogs = state.availableCatalogs,
+                                formulaSourceLabel = state.formulaSourceLabel,
+                                communicationConfig = state.communicationConfig,
+                                businessUrl = state.businessUrl,
+                                managementUrl = state.managementUrl,
+                                deviceCode = state.deviceCode,
+                                formulaSyncIntervalSeconds = state.formulaSyncIntervalSeconds,
+                                deviceConfig = state.deviceConfig,
+                                plcPollingSnapshot = state.plcPollingSnapshot,
+                                pendingOrders = state.pendingOrders,
+                                waitingTransferOrders = state.waitingTransferOrders,
+                                completedOrders = state.completedOrders,
+                                cancelledOrders = state.cancelledOrders,
+                                lastMessage = state.lastMessage,
+                                logCount = state.logs.size,
+                                logs = state.logs,
+                                registrationState = registrationState,
+                            )
                         SettingsScreen(
                             state = settingsViewState,
                             actions =

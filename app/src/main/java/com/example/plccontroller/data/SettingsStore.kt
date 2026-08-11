@@ -167,7 +167,7 @@ class SettingsStore(
     }
 
     fun updateDeviceSparePumpMode(mode: Int) {
-        writeInt(KEY_DEVICE_SPARE_PUMP_MODE, mode.takeIf { it in 0..2 } ?: AppConfig.deviceSparePumpMode)
+        writeInt(KEY_DEVICE_SPARE_PUMP_MODE, mode.takeIf { it in 0..2 } ?: AppConfig.DEVICE_SPARE_PUMP_MODE)
     }
 
     @android.annotation.SuppressLint("UseKtx")
@@ -286,7 +286,7 @@ class SettingsStore(
             formulaSyncIntervalSeconds =
                 prefs.getLong(
                     KEY_FORMULA_SYNC_INTERVAL_SECONDS,
-                    AppConfig.formulaSyncIntervalSeconds,
+                    AppConfig.FORMULA_SYNC_INTERVAL_SECONDS,
                 ),
             connectionTestRegister =
                 prefs.getInt(
@@ -347,12 +347,12 @@ class SettingsStore(
             deviceBonePasteCalibrationPercent =
                 prefs.getInt(
                     KEY_DEVICE_BONE_PASTE_CALIBRATION_PERCENT,
-                    AppConfig.deviceBonePasteCalibrationPercent,
+                    AppConfig.DEVICE_BONE_PASTE_CALIBRATION_PERCENT,
                 ),
             deviceSparePumpMode =
                 prefs.getInt(
                     KEY_DEVICE_SPARE_PUMP_MODE,
-                    AppConfig.deviceSparePumpMode,
+                    AppConfig.DEVICE_SPARE_PUMP_MODE,
                 ),
         )
 

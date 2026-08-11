@@ -160,82 +160,83 @@ private fun DeviceSettingEditDialog(
     var errorText by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(inputs) {
-        errorText = when (editor.key) {
-            DeviceSettingKey.DeviceHeaterComposite -> {
-                val temp = inputs.getOrNull(0)?.toIntOrNull()
-                val hyst = inputs.getOrNull(1)?.toIntOrNull()
-                when {
-                    temp == null || temp !in 0..120 -> "目标温度必须在 0 ~ 120 ℃ 之间"
-                    hyst == null || hyst !in 0..30 -> "回差温度必须在 0 ~ 30 ℃ 之间"
-                    else -> null
+        errorText =
+            when (editor.key) {
+                DeviceSettingKey.DeviceHeaterComposite -> {
+                    val temp = inputs.getOrNull(0)?.toIntOrNull()
+                    val hyst = inputs.getOrNull(1)?.toIntOrNull()
+                    when {
+                        temp == null || temp !in 0..120 -> "目标温度必须在 0 ~ 120 ℃ 之间"
+                        hyst == null || hyst !in 0..30 -> "回差温度必须在 0 ~ 30 ℃ 之间"
+                        else -> null
+                    }
                 }
-            }
-            DeviceSettingKey.DeviceStandaloneWaterComposite -> {
-                val mode = inputs.getOrNull(0)?.toIntOrNull()
-                val secStr = inputs.getOrNull(1) ?: ""
-                val secVal = secStr.toDoubleOrNull()
-                when {
-                    mode == null || mode !in 0..2 -> "未选择合法的加水模式"
-                    mode == 2 && (secVal == null || secVal !in 0.1..360.0) -> "时控时间必须在 0.1 ~ 360.0 秒之间"
-                    else -> null
+                DeviceSettingKey.DeviceStandaloneWaterComposite -> {
+                    val mode = inputs.getOrNull(0)?.toIntOrNull()
+                    val secStr = inputs.getOrNull(1) ?: ""
+                    val secVal = secStr.toDoubleOrNull()
+                    when {
+                        mode == null || mode !in 0..2 -> "未选择合法的加水模式"
+                        mode == 2 && (secVal == null || secVal !in 0.1..360.0) -> "时控时间必须在 0.1 ~ 360.0 秒之间"
+                        else -> null
+                    }
                 }
-            }
-            DeviceSettingKey.DeviceWaterCalibrationComposite -> {
-                val errIdx = inputs.indexOfFirst { it.toIntOrNull()?.let { p -> p !in 50..200 } ?: true }
-                if (errIdx >= 0) "出水口 ${errIdx + 1} 校准系数必须在 50% ~ 200% 之间" else null
-            }
-            DeviceSettingKey.DevicePumpCorrectionComposite -> {
-                val oil = inputs.getOrNull(0)?.toIntOrNull()
-                val paste = inputs.getOrNull(1)?.toIntOrNull()
-                when {
-                    oil == null || oil !in 50..200 -> "鸡油修正系数必须在 50% ~ 200% 之间"
-                    paste == null || paste !in 50..200 -> "骨膏修正系数必须在 50% ~ 200% 之间"
-                    else -> null
+                DeviceSettingKey.DeviceWaterCalibrationComposite -> {
+                    val errIdx = inputs.indexOfFirst { it.toIntOrNull()?.let { p -> p !in 50..200 } ?: true }
+                    if (errIdx >= 0) "出水口 ${errIdx + 1} 校准系数必须在 50% ~ 200% 之间" else null
                 }
+                DeviceSettingKey.DevicePumpCorrectionComposite -> {
+                    val oil = inputs.getOrNull(0)?.toIntOrNull()
+                    val paste = inputs.getOrNull(1)?.toIntOrNull()
+                    when {
+                        oil == null || oil !in 50..200 -> "鸡油修正系数必须在 50% ~ 200% 之间"
+                        paste == null || paste !in 50..200 -> "骨膏修正系数必须在 50% ~ 200% 之间"
+                        else -> null
+                    }
+                }
+                DeviceSettingKey.SlaveId -> {
+                    val id = inputs.getOrNull(0)?.toIntOrNull()
+                    if (id == null || id !in 1..247) "PLC 站号必须在 1 ~ 247 之间" else null
+                }
+                DeviceSettingKey.BaudRate -> {
+                    val br = inputs.getOrNull(0)?.toIntOrNull()
+                    if (br == null || br !in listOf(9600, 19200, 38400, 57600, 115200)) "波特率不合法" else null
+                }
+                DeviceSettingKey.DataBits -> {
+                    val db = inputs.getOrNull(0)?.toIntOrNull()
+                    if (db == null || db !in listOf(7, 8)) "数据位只能是 7 或 8" else null
+                }
+                DeviceSettingKey.StopBits -> {
+                    val sb = inputs.getOrNull(0)?.toIntOrNull()
+                    if (sb == null || sb !in listOf(1, 2)) "停止位只能是 1 或 2" else null
+                }
+                DeviceSettingKey.ReadTimeoutMs,
+                DeviceSettingKey.WriteTimeoutMs,
+                DeviceSettingKey.HeartbeatPeriodMs,
+                DeviceSettingKey.ActivePollingIntervalMs,
+                DeviceSettingKey.IdlePollingIntervalMs,
+                DeviceSettingKey.OrderPollingIntervalMs -> {
+                    val ms = inputs.getOrNull(0)?.toLongOrNull()
+                    if (ms == null || ms < 10) "周期/超时时间不能低于 10ms" else null
+                }
+                DeviceSettingKey.FrameGapMs -> {
+                    val ms = inputs.getOrNull(0)?.toLongOrNull()
+                    if (ms == null || ms < 10) "帧间隔不能低于 10ms" else null
+                }
+                DeviceSettingKey.FormulaSyncIntervalSeconds -> {
+                    val sec = inputs.getOrNull(0)?.toLongOrNull()
+                    if (sec == null || sec < 0) "配方同步周期不能小于 0s" else null
+                }
+                DeviceSettingKey.RetryCount -> {
+                    val count = inputs.getOrNull(0)?.toIntOrNull()
+                    if (count == null || count !in 0..10) "重试次数必须在 0 ~ 10 之间" else null
+                }
+                DeviceSettingKey.RegisterOnlyBlockCount -> {
+                    val count = inputs.getOrNull(0)?.toIntOrNull()
+                    if (count == null || count !in 0..125) "测试数量必须在 0 ~ 125 之间" else null
+                }
+                else -> null
             }
-            DeviceSettingKey.SlaveId -> {
-                val id = inputs.getOrNull(0)?.toIntOrNull()
-                if (id == null || id !in 1..247) "PLC 站号必须在 1 ~ 247 之间" else null
-            }
-            DeviceSettingKey.BaudRate -> {
-                val br = inputs.getOrNull(0)?.toIntOrNull()
-                if (br == null || br !in listOf(9600, 19200, 38400, 57600, 115200)) "波特率不合法" else null
-            }
-            DeviceSettingKey.DataBits -> {
-                val db = inputs.getOrNull(0)?.toIntOrNull()
-                if (db == null || db !in listOf(7, 8)) "数据位只能是 7 或 8" else null
-            }
-            DeviceSettingKey.StopBits -> {
-                val sb = inputs.getOrNull(0)?.toIntOrNull()
-                if (sb == null || sb !in listOf(1, 2)) "停止位只能是 1 或 2" else null
-            }
-            DeviceSettingKey.ReadTimeoutMs,
-            DeviceSettingKey.WriteTimeoutMs,
-            DeviceSettingKey.HeartbeatPeriodMs,
-            DeviceSettingKey.ActivePollingIntervalMs,
-            DeviceSettingKey.IdlePollingIntervalMs,
-            DeviceSettingKey.OrderPollingIntervalMs -> {
-                val ms = inputs.getOrNull(0)?.toLongOrNull()
-                if (ms == null || ms < 10) "周期/超时时间不能低于 10ms" else null
-            }
-            DeviceSettingKey.FrameGapMs -> {
-                val ms = inputs.getOrNull(0)?.toLongOrNull()
-                if (ms == null || ms < 10) "帧间隔不能低于 10ms" else null
-            }
-            DeviceSettingKey.FormulaSyncIntervalSeconds -> {
-                val sec = inputs.getOrNull(0)?.toLongOrNull()
-                if (sec == null || sec < 0) "配方同步周期不能小于 0s" else null
-            }
-            DeviceSettingKey.RetryCount -> {
-                val count = inputs.getOrNull(0)?.toIntOrNull()
-                if (count == null || count !in 0..10) "重试次数必须在 0 ~ 10 之间" else null
-            }
-            DeviceSettingKey.RegisterOnlyBlockCount -> {
-                val count = inputs.getOrNull(0)?.toIntOrNull()
-                if (count == null || count !in 0..125) "测试数量必须在 0 ~ 125 之间" else null
-            }
-            else -> null
-        }
     }
 
     AlertDialog(
@@ -470,10 +471,11 @@ private fun DeviceSettingEditDialog(
             TextButton(
                 enabled = errorText == null,
                 onClick = { onConfirm(inputs.joinToString("|")) },
-                colors = ButtonDefaults.textButtonColors(
-                    contentColor = Cyan,
-                    disabledContentColor = TextSecondary.copy(alpha = 0.4f)
-                ),
+                colors =
+                    ButtonDefaults.textButtonColors(
+                        contentColor = Cyan,
+                        disabledContentColor = TextSecondary.copy(alpha = 0.4f)
+                    ),
             ) { Text("保存") }
         },
         dismissButton = {

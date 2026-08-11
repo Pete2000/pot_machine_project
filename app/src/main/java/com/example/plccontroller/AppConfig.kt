@@ -24,7 +24,7 @@ object AppConfig {
     const val plcActivePollingIntervalMs = 200L
     const val plcIdlePollingIntervalMs = 500L
     const val plcConnectionTestRegister = 200
-    const val formulaSyncIntervalSeconds = 30L
+    const val FORMULA_SYNC_INTERVAL_SECONDS = 30L
     const val localOrderHistoryLimit = 80
 
     const val deviceHeaterTargetTemp = 90
@@ -35,6 +35,6 @@ object AppConfig {
     const val deviceStandaloneWaterTimedTicks = 100
     const val deviceWaterOutletCalibrationPercent = 100
     const val deviceChickenOilCalibrationPercent = 100
-    const val deviceBonePasteCalibrationPercent = 100
-    const val deviceSparePumpMode = 0
+    const val DEVICE_BONE_PASTE_CALIBRATION_PERCENT = 100
+    const val DEVICE_SPARE_PUMP_MODE = 0
 }

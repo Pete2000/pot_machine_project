@@ -374,11 +374,11 @@ internal fun FormulaParameterField(
     val isError = doubleVal == null || doubleVal < minVal || doubleVal > maxVal
     val errorMsg =
         when {
-        doubleVal == null -> "请输入合法的数值"
-        doubleVal < minVal -> "不能低于 ${minVal}s"
-        doubleVal > maxVal -> "不能超过 ${maxVal}s"
-        else -> null
-    }
+            doubleVal == null -> "请输入合法的数值"
+            doubleVal < minVal -> "不能低于 ${minVal}s"
+            doubleVal > maxVal -> "不能超过 ${maxVal}s"
+            else -> null
+        }
 
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(

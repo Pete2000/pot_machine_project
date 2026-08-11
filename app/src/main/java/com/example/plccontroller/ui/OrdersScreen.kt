@@ -443,13 +443,14 @@ private fun RowScope.OrderOperationBadge(
                 horizontalAlignment = Alignment.Start,
             ) {
                 lines.forEach { line ->
-                    val lineColor = when (line) {
-                        "转台" -> Color(0xFFFFAB40)
-                        "催单" -> Color(0xFFFF5A79)
-                        "退单" -> Color(0xFFE040FB)
-                        "下单" -> TextSecondary
-                        else -> displayColor
-                    }
+                    val lineColor =
+                        when (line) {
+                            "转台" -> Color(0xFFFFAB40)
+                            "催单" -> Color(0xFFFF5A79)
+                            "退单" -> Color(0xFFE040FB)
+                            "下单" -> TextSecondary
+                            else -> displayColor
+                        }
                     Text(
                         text = line,
                         color = lineColor,
@@ -712,14 +713,15 @@ private fun OrderDetailDialog(
     formulaCatalog: com.example.plccontroller.domain.FormulaCatalog?,
     onDismiss: () -> Unit,
 ) {
-    val presentedGrid = remember(order, formulaCatalog) {
-        com.example.plccontroller.ui.potdetail.PotDetailPresenter.presentOrder(
-            order = order,
-            formulaCatalog = formulaCatalog,
-            forcedTopLeftLogicalSlot = null,
-            currentTopLeftLogicalSlot = null,
-        )
-    }
+    val presentedGrid =
+        remember(order, formulaCatalog) {
+            com.example.plccontroller.ui.potdetail.PotDetailPresenter.presentOrder(
+                order = order,
+                formulaCatalog = formulaCatalog,
+                forcedTopLeftLogicalSlot = null,
+                currentTopLeftLogicalSlot = null,
+            )
+        }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -778,32 +780,35 @@ private fun OrderDetailDialog(
                                 fontWeight = FontWeight.Bold
                             )
                         }
-                        val timeText = when (order.status) {
-                            com.example.plccontroller.domain.OrderStatus.Completed -> {
-                                val time = order.transferCompletedAt ?: order.statusUpdatedAt ?: "--"
-                                "完成时间: $time"
+                        val timeText =
+                            when (order.status) {
+                                com.example.plccontroller.domain.OrderStatus.Completed -> {
+                                    val time = order.transferCompletedAt ?: order.statusUpdatedAt ?: "--"
+                                    "完成时间: $time"
+                                }
+                                com.example.plccontroller.domain.OrderStatus.Cancelled -> {
+                                    val time = order.cancelledAt ?: order.statusUpdatedAt ?: "--"
+                                    "取消时间: $time"
+                                }
+                                else -> "更新时间: ${order.statusUpdatedAt ?: "--"}"
                             }
-                            com.example.plccontroller.domain.OrderStatus.Cancelled -> {
-                                val time = order.cancelledAt ?: order.statusUpdatedAt ?: "--"
-                                "取消时间: $time"
-                            }
-                            else -> "更新时间: ${order.statusUpdatedAt ?: "--"}"
-                        }
                         Text(timeText, color = TextPrimary, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
 
                 Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(BorderBlue.copy(alpha = 0.2f))
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(1.dp)
+                            .background(BorderBlue.copy(alpha = 0.2f))
                 )
 
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(280.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(280.dp)
                 ) {
                     PotDetailGrid(
                         layoutMode = presentedGrid.layoutMode,

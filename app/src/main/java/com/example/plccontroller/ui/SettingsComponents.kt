@@ -161,11 +161,12 @@ internal fun SettingsOverviewCard(
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
             )
-            val valueStyle = when {
-                model.value.length > 24 -> MaterialTheme.typography.bodyMedium
-                model.value.length > 14 -> MaterialTheme.typography.titleMedium
-                else -> MaterialTheme.typography.headlineSmall
-            }
+            val valueStyle =
+                when {
+                    model.value.length > 24 -> MaterialTheme.typography.bodyMedium
+                    model.value.length > 14 -> MaterialTheme.typography.titleMedium
+                    else -> MaterialTheme.typography.headlineSmall
+                }
             val valueMaxLines = if (model.value.length > 14) 2 else 1
 
             Text(

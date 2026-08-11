@@ -258,14 +258,16 @@ private fun settingsOverviewCardsClean(
                 ),
                 SettingsOverviewCardModel(
                     label = "水箱加热",
-                    value = if (state.plcPollingSnapshot.temperatureSensor0 != null) {
-                        state.plcPollingSnapshot.formatTemperature0Cn()
-                    } else {
-                        "未联机"
-                    },
-                    detail = state.deviceConfig?.let {
-                        "目标: ${it.deviceHeaterTargetTemp}℃ / 回差: ${it.deviceHeaterHysteresisTemp}℃"
-                    } ?: "暂无参数",
+                    value =
+                        if (state.plcPollingSnapshot.temperatureSensor0 != null) {
+                            state.plcPollingSnapshot.formatTemperature0Cn()
+                        } else {
+                            "未联机"
+                        },
+                    detail =
+                        state.deviceConfig?.let {
+                            "目标: ${it.deviceHeaterTargetTemp}℃ / 回差: ${it.deviceHeaterHysteresisTemp}℃"
+                        } ?: "暂无参数",
                     accent = if (state.plcPollingSnapshot.temperatureSensor0 != null) Blue else Yellow,
                 ),
             )
@@ -297,12 +299,13 @@ private fun settingsOverviewCardsClean(
                 SettingsOverviewCardModel(
                     label = "Modbus轮询",
                     value = if (state.plcPollingSnapshot.lastSuccessfulPollAtMs != null) "通信中" else "停止",
-                    detail = state.communicationConfig?.let {
-                        val slave = it.slaveId
-                        val gap = it.frameGapMs
-                        val poll = it.idlePollingIntervalMs
-                        "从站: $slave / 帧间隔: ${gap}ms / 轮询: ${poll}ms"
-                    } ?: "未连接",
+                    detail =
+                        state.communicationConfig?.let {
+                            val slave = it.slaveId
+                            val gap = it.frameGapMs
+                            val poll = it.idlePollingIntervalMs
+                            "从站: $slave / 帧间隔: ${gap}ms / 轮询: ${poll}ms"
+                        } ?: "未连接",
                     accent = if (state.plcPollingSnapshot.lastSuccessfulPollAtMs != null) Green else Red,
                 ),
             )
@@ -313,32 +316,33 @@ private fun settingsOverviewCardsClean(
 private fun SettingsScreenPreview() {
     MaterialTheme {
         Box(modifier = Modifier.background(PageBackground)) {
-            val previewState = SettingsViewState(
-                networkState = NetworkConnectionState.Online,
-                plcState = PlcConnectionState.Connected,
-                formulaCatalog = null,
-                availableCatalogs = emptyList(),
-                formulaSourceLabel = "本地默认",
-                communicationConfig = null,
-                businessUrl = "http://127.0.0.1",
-                managementUrl = "http://127.0.0.1",
-                deviceCode = "DEV-001",
-                formulaSyncIntervalSeconds = 30L,
-                deviceConfig = null,
-                plcPollingSnapshot = PlcPollingSnapshot(),
-                pendingOrders = emptyList(),
-                waitingTransferOrders = emptyList(),
-                completedOrders = emptyList(),
-                cancelledOrders = emptyList(),
-                lastMessage = "系统就绪",
-                logCount = 0,
-                logs =
-                    listOf(
-                        "1717723200000  应用启动完成",
-                        "1717723205000  PLC 通讯恢复正常",
-                    ),
-                registrationState = RegistrationState.Idle
-            )
+            val previewState =
+                SettingsViewState(
+                    networkState = NetworkConnectionState.Online,
+                    plcState = PlcConnectionState.Connected,
+                    formulaCatalog = null,
+                    availableCatalogs = emptyList(),
+                    formulaSourceLabel = "本地默认",
+                    communicationConfig = null,
+                    businessUrl = "http://127.0.0.1",
+                    managementUrl = "http://127.0.0.1",
+                    deviceCode = "DEV-001",
+                    formulaSyncIntervalSeconds = 30L,
+                    deviceConfig = null,
+                    plcPollingSnapshot = PlcPollingSnapshot(),
+                    pendingOrders = emptyList(),
+                    waitingTransferOrders = emptyList(),
+                    completedOrders = emptyList(),
+                    cancelledOrders = emptyList(),
+                    lastMessage = "系统就绪",
+                    logCount = 0,
+                    logs =
+                        listOf(
+                            "1717723200000  应用启动完成",
+                            "1717723205000  PLC 通讯恢复正常",
+                        ),
+                    registrationState = RegistrationState.Idle
+                )
             SettingsScreen(
                 state = previewState,
                 actions = emptySettingsScreenActions(),

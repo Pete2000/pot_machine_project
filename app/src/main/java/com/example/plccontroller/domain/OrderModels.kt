@@ -81,8 +81,7 @@ data class ManualWaterPhaseSlot(
     val formulaMissing: Boolean = false,
 )
 
-fun ManualWaterPhaseSlot.hasPhysicalAction(): Boolean =
-    waterDurationMs > 0L || chickenOilDurationMs > 0L || bonePasteDurationMs > 0L
+fun ManualWaterPhaseSlot.hasPhysicalAction(): Boolean = waterDurationMs > 0L || chickenOilDurationMs > 0L || bonePasteDurationMs > 0L
 
 data class ManualWaterPhaseRequest(
     val mode: ManualWaterPotMode,

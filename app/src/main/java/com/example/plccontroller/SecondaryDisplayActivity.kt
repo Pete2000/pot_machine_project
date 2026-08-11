@@ -51,13 +51,11 @@ class SecondaryDisplayActivity : ComponentActivity() {
         }
     }
 
-    override fun dispatchGenericMotionEvent(ev: android.view.MotionEvent): Boolean {
-        return try {
+    override fun dispatchGenericMotionEvent(ev: android.view.MotionEvent): Boolean =
+        try {
             super.dispatchGenericMotionEvent(ev)
         } catch (e: IllegalStateException) {
             android.util.Log.w("HoverGuard", "Swallowed ACTION_HOVER_EXIT exception to prevent crash", e)
             true
         }
-    }
 }
-
